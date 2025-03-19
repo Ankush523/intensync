@@ -26,19 +26,21 @@ const generateUniquePositions = (count: number, size: number = 120) => {
   const minDistance = size * 1.5; // Minimum space between tokens
 
   for (let i = 0; i < count; i++) {
-    let newPos;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let newPos: any;
     let attempts = 0;
     do {
       newPos = {
-        top: Math.random() * (90 - size / window.innerHeight * 100) + 5, // Keeping tokens inside the viewport
-        left: Math.random() * (90 - size / window.innerWidth * 100) + 5,
+        top: Math.random() * (90 - (size / window.innerHeight) * 100) + 5, // Keeping tokens inside the viewport
+        left: Math.random() * (90 - (size / window.innerWidth) * 100) + 5,
       };
       attempts++;
     } while (
       positions.some(
         (pos) =>
           Math.hypot(pos.top - newPos.top, pos.left - newPos.left) < minDistance
-      ) && attempts < 50
+      ) &&
+      attempts < 50
     ); // Avoid infinite loops
     positions.push(newPos);
   }

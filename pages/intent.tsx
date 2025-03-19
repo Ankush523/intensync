@@ -223,7 +223,7 @@ const Intent: NextPage = () => {
                   : "bg-linear-to-r from-yellow-300 to-yellow-600 text-black"
               }`}
             >
-              {loading ? "Processing..." : "Send Intent"}
+              {loading ? "Processing..." : "Submit"}
             </button>
           </div>
 
