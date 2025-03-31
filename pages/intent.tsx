@@ -55,7 +55,7 @@ const Intent: NextPage = () => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({ body: `${encryptedCommand}` }),
+      body: JSON.stringify({ body: `${command}` }),
     };
     const response = await fetch("http://localhost:8000/completion", options);
 
@@ -243,7 +243,7 @@ const Intent: NextPage = () => {
               className="mt-8 text-yellow-400 text-md cursor-pointer hover:text-yellow-300 transition duration-300"
               onClick={() =>
                 window.open(
-                  `https://mumbai.polygonscan.com/tx/${txHash}`,
+                  `https://sepolia.etherscan.io/tx/${txHash}`,
                   "_blank"
                 )
               }
