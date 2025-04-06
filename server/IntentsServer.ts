@@ -3,9 +3,12 @@ import { ethers } from "ethers";
 import cors from "cors";
 import { Configuration, OpenAIApi } from "openai";
 import bodyParser from "body-parser";
+import CryptoJS from "crypto-js";
 
 const app = express();
 app.use(cors());
+
+const SECRET_KEY = "YOUR_SECRET_KEY"; // Change this to a secure key
 
 const AAVE_LENDING_POOL_ABI = [
   "function borrow(address _asset, uint256 _amount, uint256 _interestRateMode, uint16 _referralCode, address _onBehalfOf) external",
@@ -951,8 +954,11 @@ app.use(bodyParser.json());
 app.post("/completion", async (req: any, res: any) => {
   console.log(req.body.body);
   const message = req.body.body;
+  const decryptedMessage = CryptoJS.AES.decrypt(message, SECRET_KEY).toString(
+    CryptoJS.enc.Utf8
+  );
   try {
-    const response = await getGptCompletion(message);
+    const response = await getGptCompletion(decryptedMessage);
     console.log(response);
     res.json(response);
   } catch (error) {
