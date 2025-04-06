@@ -34,12 +34,20 @@ const Intent: NextPage = () => {
     return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
   };
 
+  const decryptText = (text: string) => {
+    console.log(CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8));
+    return CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+  }
+
   const getIntent = async () => {
     if (!command.trim()) return;
     setLoading(true);
 
     // Encrypt the command text
     const encryptedCommand = encryptText(command);
+    console.log("Encrypted command:", encryptedCommand);
+    const decryptedCommand = decryptText(encryptedCommand);
+    console.log("Decrypted command:", decryptedCommand);
 
     // Show toast notification for successful encryption
     setToastMessage({
@@ -55,7 +63,7 @@ const Intent: NextPage = () => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({ body: `${command}` }),
+      body: JSON.stringify({ body: `${encryptedCommand}` }),
     };
     const response = await fetch("http://localhost:8000/completion", options);
 

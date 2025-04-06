@@ -855,8 +855,7 @@ const sendTransaction = async (
 };
 
 const configuration = new Configuration({
-  apiKey:
-    "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
