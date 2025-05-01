@@ -20,14 +20,13 @@ const Intent: NextPage = () => {
   const [command, setCommand] = useState("");
   const [loading, setLoading] = useState(false);
   const [chainId, setChainId] = useState("");
-  const [txnHash, setTxnHash] = useState("");
   const [txHash, setTxHash] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState({
     title: "",
     description: "",
   });
-
+  const txnHash = '';
   // Encrypt function using AES
   const encryptText = (text: string) => {
     console.log(CryptoJS.AES.encrypt(text, SECRET_KEY).toString());
