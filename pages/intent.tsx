@@ -35,9 +35,11 @@ const Intent: NextPage = () => {
   };
 
   const decryptText = (text: string) => {
-    console.log(CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8));
+    console.log(
+      CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8)
+    );
     return CryptoJS.AES.decrypt(text, SECRET_KEY).toString(CryptoJS.enc.Utf8);
-  }
+  };
 
   const getIntent = async () => {
     if (!command.trim()) return;
